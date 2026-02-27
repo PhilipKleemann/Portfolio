@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Load data from an external GeoJSON file</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <style>
+        body, html { 
+            margin:0;
+            padding:0;
+            height:100%;
+            overflow: hidden;
+         }
+        #map { 
+            position:absolute; 
+            top:0; 
+            bottom:0; 
+            left: 0;
+            right: 0;
+        }
+
+        /* Floating side panel */
+        #table {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 400px;
+            max-width: 90%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.9);
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: -3px 0 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 10;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 1024px) {
+            #table { display: none; }
+        }
+
+        table { border-collapse: collapse; width:100%; margin-top:10px; }
+        th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+        tr:nth-child(even){ background-color:#f2f2f2; }
+        button { margin-bottom:10px; }
+    </style>
+</head>
+
+<body>
+    <main id="container">
+        <div id="table">
+
+            <h2>Seattle Soccer Fields</h2>
+            <button onclick="sortTableByName()">Sort by Name</button>            
+
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Surface Type</th>
+                </tr>
+            </table>
+
+        </div>
+        <div id="map"></div>
+
+    </main>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoicGhpbGlwa2xlZW1hbm4yIiwiYSI6ImNtaWp5c2p2MDE2a3IzZXBtYnBjeDliNGoifQ.o5jwuQrTIuQ983mQAx4BwQ';
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/satellite-streets-v10', // style URL
+            zoom: 10, // starting zoom
+            center: [-122.3321, 47.6062] // starting center
+        });
+
+
+        async function geojsonFetch() {
+
+
+            let response = await fetch('assets/seattle.geojson');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            let seattle = await response.json();
+
+
+            response = await fetch('assets/soccer.geojson');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            let soccer = await response.json();
+
+
+            var table = document.getElementsByTagName("table");
+            for (let i = 0; i < soccer.features.length; i++) {
+                // console.log(earthquakes.features[i].properties.id);
+
+                var lng = await soccer.features[i].geometry.coordinates[0];
+                var lat = await soccer.features[i].geometry.coordinates[1];
+
+                // Create an empty <tr> element and add it to the 1st position of the table:
+                var row = table[0].insertRow(-1);
+
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                cell1.innerHTML = await soccer.features[i].properties.OBJECTID;
+                cell2.innerHTML = await soccer.features[i].properties.NAME;
+                cell3.innerHTML = await soccer.features[i].properties.E_SURFACE;
+
+
+            }
+
+
+
+
+            map.on('load', () => {
+
+
+
+                map.addSource('seattle', {
+                    type: 'geojson',
+                    data: seattle
+                });
+
+                map.addLayer({
+                    'id': 'seattle-layer',
+                    'type': 'fill',
+                    'source': 'seattle',
+                    'paint': {
+                        'fill-color': '#ff8000', // orange color fill
+                        'fill-opacity': 0.325
+                    }
+                });
+
+
+                map.addSource('soccer', {
+                    type: 'geojson',
+                    data: soccer
+                });
+
+                map.addLayer({
+                    'id': 'soccer-layer',
+                    'type': 'circle',
+                    'source': 'soccer',
+                    'paint': {
+                        'circle-color': '#0080ff', // blue color fill
+                        'circle-radius': 5,
+                        'circle-stroke-width': 1,
+                        'circle-stroke-color': 'white'
+                    }
+                });
+            });
+
+
+
+
+        }
+
+        geojsonFetch()
+            .catch(e => {
+                console.log('There has been a problem with your fetch operation: ' + e.message);
+            });
+
+
+
+    function sortTableByName() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementsByTagName("table")[0];
+    switching = true;
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+
+            // Get the text content of the Name column (2nd column, index 1)
+            x = rows[i].getElementsByTagName("td")[1].textContent.toLowerCase();
+            y = rows[i + 1].getElementsByTagName("td")[1].textContent.toLowerCase();
+
+            // Compare alphabetically
+            if (x > y) {  
+                shouldSwitch = true;
+                break;
+            }
+        }
+
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+    </script>
+
+</body>
+
+</html>
