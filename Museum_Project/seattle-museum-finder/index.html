@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Museums & Parking — Map</title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+  <link href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet"/>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <!-- Mapbox Directions plugin CSS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css">
+  
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; }
+    /* page container modifier for index: full-bleed map */
+    .page-content.map-full { padding: 0; max-width: 100%; margin: 0; }
+    .map-wrapper { width: 100%; height: calc(100vh - 48px); position: relative; }
+    #map { height: 100%; width: 100%; }
+    .absolute { box-shadow: 0 2px 6px rgba(0,0,0,0.12); background: #fff; border-radius: 6px; }
+    /* Map title overlay */
+    .map-title { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1250; background: rgba(255,255,255,0.85); padding: 10px 16px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.12); font-family: sans-serif; text-align: center; }
+    .map-title h1 { margin: 0; font-size: 18px; font-weight: 700; }
+    .map-title p { margin: 6px 0 0 0; font-size: 12px; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="topnav" id="myTopnav">
+    <a href="index.html" class="active">Home</a>
+    <a href="project_description.html">Project Description</a>
+    <a href="team.html">Team</a>
+  </div>
+
+  <!-- mapbox top-left buttons (moved into the map wrapper below so it overlays the map) -->
+
+  <div class="page-content map-full">
+    <!-- Map wrapper: map and overlays are positioned inside so overlays sit on top of the map -->
+    <div class="map-wrapper" style="position:relative; width:100%">
+      <!-- Title overlay placed over the map (moved from page header) -->
+      <div class="map-title">
+        <h1>Seattle Museum Map</h1>
+        <p>This page displays the basemap used for our Seattle Museum Finder project. Please use the top navigation bar to explore our exciting project!</p>
+      </div>
+      <div id="map"></div>
+
+      <!-- isochrone / travel controls: overlayed top-left on map -->
+      <div class="absolute fl my24 mx24 py24 px24 bg-gray-faint round" style="position:absolute; right:12px; bottom:12px; z-index:1200;">
+        <form id="params">
+          <h4 class="txt-m txt-bold mb6">Choose a travel mode:</h4>
+          <div class="mb12 mr12 toggle-group align-center">
+            <label class="toggle-container">
+              <input name="profile" type="radio" value="walking" />
+              <div class="toggle toggle--active-null toggle--null">Walking</div>
+            </label>
+            <label class="toggle-container">
+              <input name="profile" type="radio" value="cycling" checked />
+              <div class="toggle toggle--active-null toggle--null">Cycling</div>
+            </label>
+            <label class="toggle-container">
+              <input name="profile" type="radio" value="driving" />
+              <div class="toggle toggle--active-null toggle--null">Driving</div>
+            </label>
+          </div>
+          <h4 class="txt-m txt-bold mb6">Choose a maximum duration:</h4>
+          <div class="mb12 mr12 toggle-group align-center">
+            <label class="toggle-container">
+              <input name="duration" type="radio" value="5" />
+              <div class="toggle toggle--active-null toggle--null">5 min</div>
+            </label>
+            <label class="toggle-container">
+              <input name="duration" type="radio" value="10" checked />
+              <div class="toggle toggle--active-null toggle--null">10 min</div>
+            </label>
+            <label class="toggle-container">
+              <input name="duration" type="radio" value="15" />
+              <div class="toggle toggle--active-null toggle--null">15 min</div>
+            </label>
+          </div>
+        </form>
+      </div>
+
+      <!-- museum info overlay (right) - overlayed on the map -->
+      <div class="map-overlay" id="museum-info" style="position:absolute; top:20px; right:84px; z-index:1200; display:block; background:#fff; padding:8px; border-radius:4px; box-shadow:0 2px 6px rgba(0,0,0,0.12); max-width:260px;">
+        <h2 style="margin:0 0 6px 0; font-size:16px">Museum Information</h2>
+        <div id="museum-content">
+          <p style="margin:0">Hover over a museum!</p>
+        </div>
+      </div>
+      <!-- Legend overlay -->
+      <div id="map-legend" style="position:absolute; left:12px; bottom:12px; z-index:1250; background: rgba(255,255,255,0.9); padding:8px 10px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.12); font-family: sans-serif; font-size:13px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:6px;background:#ff5500;border:1px solid rgba(0,0,0,0.15);"></span> Museums</div>
+        <div style="display:flex; align-items:center; gap:8px;"><span style="display:inline-block;width:12px;height:12px;border-radius:6px;background:rgba(0,42,255,1);border:1px solid rgba(0,0,0,0.15);"></span> Parking / Garages</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <!-- Mapbox Directions plugin JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
