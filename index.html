@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Philip Kleemann | Data Visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of data visualization work by Philip Kleemann—exploring stories through data, design, and code.">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="topnav">
+    <div class="nav-left">Philip Kleemann</div>
+    <div class="nav-right">
+      <a href="#work">Data Visualizations</a>
+      <a href="#covid-maps">Web Maps</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- GALLERY -->
+  <section id="work" class="section">
+    <div class="section-header">
+      <p class="section-label">Projects</p>
+      <h2>Data Visualizations</h2>
+    </div>
+
+    <div class="gallery">
+
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="img/Pallet.png" alt="Sunset color palettes visualization" class="lightbox-img">
+        </div>
+        <div class="desc">
+          <h3>Sunset Color Palettes</h3>
+          <p>
+            A Python-generated visualization analyzing the color distribution of 30 sunset photographs
+            taken at Golden Gardens, Seattle. The x-axis represents capture date and the y-axis shows
+            proportional color presence.
+          </p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="img/Dendrogram.png" alt="Pike Place Yelp dendrogram" class="lightbox-img">
+        </div>
+        <div class="desc">
+          <h3>Pike Place Yelp Dendrogram</h3>
+          <p>
+            A hierarchical clustering of Yelp data visualizing points of interest in Pike Place Market.
+            Node size reflects review ratings, revealing popularity patterns across categories.
+          </p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="img/Sankey.png" alt="Seattle bike traffic Sankey diagram" class="lightbox-img">
+        </div>
+        <div class="desc">
+          <h3>Seattle Bike Traffic Flow</h3>
+          <p>
+            A Sankey diagram illustrating bike traffic volume between major trails and stops in Seattle.
+            Line thickness corresponds to traffic magnitude.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COVID-19 MAPS -->
+  <section id="covid-maps" class="section">
+    <div class="section-header">
+      <h2>Interactive Web Mapping</h2>
+    </div>
+
+    <div class="gallery">
+
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="COVID-19_Thematic_Maps-1/img/choropleth_screenshot2.png"
+               alt="COVID-19 choropleth map of US counties"
+               class="lightbox-img">
+        </div>
+        <div class="desc">
+          <h3>COVID-19 Rates Choropleth</h3>
+          <p>
+            An interactive choropleth map of COVID-19 case rates by U.S. county using Mapbox GL JS.
+            Counties are shaded by rate, with a legend and hover interaction that surfaces details
+            for each location.
+          </p>
+          <a class="button" href="COVID-19_Thematic_Maps-1/map1.html" target="_blank" rel="noopener">
+            View Map
+          </a>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="COVID-19_Thematic_Maps-1/img/proportional_screenshot.png"
+               alt="COVID-19 proportional symbol map"
+               class="lightbox-img">
+        </div>
+        <div class="desc">
+          <h3>COVID-19 Proportional Symbols</h3>
+          <p>
+            A proportional symbol map showing total COVID-19 cases across the United States.
+            Circle size encodes case counts, highlighting geographic patterns in the spread
+            of the virus.
+          </p>
+          <a class="button" href="COVID-19_Thematic_Maps-1/map2.html" target="_blank" rel="noopener">
+            View Map
+          </a>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="soccer_fields/img/map.png"
+               alt="Seattle soccer fields map screenshot"
+               class="lightbox-img">
+        </div>
+        <div class="desc">
+          <h3>Seattle Soccer Fields</h3>
+          <p>
+            An interactive Mapbox GL JS map of Seattle soccer fields, paired with a sortable table
+            of field names and surface types. Explore field locations and quickly scan attributes
+            in the side panel.
+          </p>
+          <a class="button" href="soccer_fields/index.html" target="_blank" rel="noopener">
+            View Map
+          </a>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="Museum_Project/seattle-museum-finder/img/map.png"
+               alt="Seattle museum and parking access map screenshot"
+               class="lightbox-img">
+        </div>
+        <div class="desc">
+          <h3>Seattle Museums & Parking</h3>
+          <p>
+            An interactive Mapbox GL JS application showing Seattle museums alongside nearby parking
+            options, including travel-time isochrones and mode selection (walking, cycling, driving)
+            to explore accessibility.
+          </p>
+          <a class="button" href="Museum_Project/seattle-museum-finder/index.html" target="_blank" rel="noopener">
+            View Map
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about">
+    <div class="section-header section-header--solo">
+      <h2 class="section-title">Background</h2>
+    </div>
+    <div class="about-content">
+    <p>
+      A dedicated student-athlete at the University of Washington pursuing a degree in Geography with Data Science while honing skills in computer science, R, SQL, and web development (JavaScript, HTML, CSS). Currently balancing rigorous academics with athletic commitments, contributing to both team success and personal growth. Previous educational experience includes a high school diploma from Newbury Park High School, where a strong foundation in digital arts and technology was cultivated.     Passionate about leveraging data science and technology to solve complex problems and drive innovation.
+    </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact">
+    <div class="section-header section-header--solo">
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-content">
+      <div class="contact-item contact-item--email">
+        <h3>Email</h3>
+        <a href="mailto:philip.jann.kleemann@gmail.com">philip.jann.kleemann@gmail.com</a>
+      </div>
+      <div class="contact-item contact-item--linkedin">
+        <h3>LinkedIn</h3>
+        <a href="https://www.linkedin.com/in/philip-kleemann" target="_blank" rel="noopener">
+          linkedin.com/in/philip-kleemann
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Philip Kleemann
+  </footer>
+
+  <!-- LIGHTBOX -->
+<div id="lightbox">
+  <span class="close">&times;</span>
+  <img id="lightbox-img" src="">
+  <div class="controls">
+    <span id="prev">&#10094;</span>
+    <span id="next">&#10095;</span>
+  </div>
+</div>
+
+  <script src="js/main.js"></script>
+
+</body>
+</html>
