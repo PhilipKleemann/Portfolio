@@ -1,0 +1,67 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Map container */
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Legend panel */
+#legend {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    right: 0;
+    width: 150px;              /* wider for case numbers */
+    background: rgba(255,255,255,0.95);
+    margin-right: 20px;
+    margin-bottom: 40px;
+    padding: 12px 15px;
+    border-radius: 5px;
+    text-align: left;          /* easier to read numbers */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11pt;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+
+}
+
+/* Each legend row */
+.break {
+    display: flex;
+    align-items: center;
+    margin: 4px;
+
+}
+
+/* Legend dots */
+.dot {
+    width: 20px;             /* fixed size for all legend dots */
+    height: 20px;
+    border-radius: 50%;
+    opacity: 0.7;
+    margin-right: 10px; 
+}
+
+/* Legend labels */
+.dot-label {
+    font-style: normal;
+}
+
+/* Hyperlinks */
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
